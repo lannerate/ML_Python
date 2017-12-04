@@ -37,9 +37,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 #using different algorithm to train
 clf = LinearRegression(n_jobs=10)
-clf = svm.LinearSVR()
+# clf = svm.LinearSVR()
 # clf = svm.SVR(kernel='sigmoid')
-
 clf.fit(X_train, y_train)
 accuracy = clf.score(X_test, y_test)
 print(accuracy)
