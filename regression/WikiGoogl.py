@@ -24,8 +24,10 @@ forecast_out = int(math.ceil(0.01*len(df)))
 
 df['label'] = df[forecast_col].shift(-forecast_out)
 df.dropna(inplace=True)
-# print(df.tail(33))
 
+print(df.tail(33))
+
+#training & testing
 X = np.array(df.drop(['label'],1))
 y = np.array(df['label'])
 X = preprocessing.scale(X)
@@ -33,9 +35,11 @@ y = np.array(df['label'])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# clf = LinearRegression(n_jobs=10)
-# clf = svm.LinearSVR()
-clf = svm.SVR(kernel='sigmoid')
+#using different algorithm to train
+clf = LinearRegression(n_jobs=10)
+clf = svm.LinearSVR()
+# clf = svm.SVR(kernel='sigmoid')
+
 clf.fit(X_train, y_train)
 accuracy = clf.score(X_test, y_test)
 print(accuracy)
